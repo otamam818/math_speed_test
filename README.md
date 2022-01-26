@@ -7,7 +7,7 @@ A simple game for math calculations. The idea was to code it so that it can be i
 
 It has a user-storage system so that many people can play in a local computer
 
-## Running the app
+## Usage
 If you are on UNIX-based systems:
 ```bash
 python3 main.py
