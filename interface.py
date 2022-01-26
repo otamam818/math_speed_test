@@ -217,6 +217,5 @@ def leave_program(message):
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 if __name__ == "__main__":
     # For debugging and tests
-    print(parse_answer("9 / 3", '/'))
     pass
 
