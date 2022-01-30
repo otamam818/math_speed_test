@@ -7,21 +7,20 @@ import random
 import colors
 
 from typing import Final, List, Union
+from statistics import mean 
 
 # Constants
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 NUMBER_CHOICE: str = "\nPick a number: "
 YES_NO_CHOICE: str = "\n1. Yes\n2. No" + NUMBER_CHOICE
+YES = '1'
+NO  = '2'
 SEPARATOR = '―'*20
 SYMBOLS = "+-*/"
 
 # Special datatypes
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 Number = Union[int, float]
-# ENUM
-# ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
-SUCCESS = object()
-FAILURE = object()
 
 # Functions
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
@@ -62,12 +61,10 @@ def select_user() -> str:
             user_choice = user_list[number_choice-1]
     else:
         choice = input("No user available. Create new? " + YES_NO_CHOICE)
-        YES = '1'
-        NO  = '2'
         if choice == YES:
             user_choice = make_new_user()
         elif choice == NO:
-            leave_program(SUCCESS)
+            leave_program()
     return user_choice
 
 def show_exit_shortcut() -> None:
@@ -75,8 +72,8 @@ def show_exit_shortcut() -> None:
 
 def choose_options() -> int:
     options: str = "\n".join([
-        "1. Test for 10 numbers",
-        "2. Test for 100 numbers",
+        "1. Test for 10 numbers  ",
+        "2. Test for 100 numbers ",
         "3. Test for 1000 numbers"
     ])
     separate()
@@ -97,7 +94,7 @@ def make_new_user() -> str:
     username = input("Enter username: ")
     return json_handler.create_user(username)
 
-def test_math(username, score, option):
+def test_math(username, option):
     """Tests the user with mathematic questions"""
     # A symbol needs to be unbiasedly chosen to test against
     chosen_symbol = random.choice(SYMBOLS)
@@ -207,11 +204,55 @@ def show_time(user_time):
     colors.echo(user_time, colors.YELLOW, end='')
     print(" second(s)")
 
+def request_overwrite_score(user, score: List[float], game_choice) -> bool:
+    """
+    Ask the user if they want their score to be overwitten. 
+    
+    Returns a bool:
+      - True -> Yes, they want their score to be overwitten.
+      - False -> No, they do not want their score to be overwitten.
+    """
+
+    # To add text in new line before executing logic
+    print()
+
+    EMPTY: List = []
+    previous_score = json_handler.get_score(user, game_choice)
+
+    if score != EMPTY:
+        new_average_score = mean(score)
+        compare_scores(
+            ("New score: ", new_average_score),
+            ("Previous score: ", previous_score)
+        )
+        # Let the user decide what to do with the new score
+        choice = input("Do you want to overwrite your previous score?"
+                       + YES_NO_CHOICE)
+
+        separate()
+        if choice == YES:
+            json_handler.update_score(user, game_choice, new_average_score)
+        elif choice == NO:
+            raise KeyboardInterrupt
+
+def compare_scores(*args):
+    """Comapres the new and old scores"""
+    for score_info in args:
+        description: str = score_info[0]
+        score: float = score_info[1]
+
+        print(description, end='')
+        if score == None:
+            colors.echo("No score", colors.YELLOW)
+        else:
+            colors.echo(f"{score:.2f} second(s)", colors.GREEN)
+        separate()
+
 # Misc functions
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
-def leave_program(message):
-    EXIT_CODE = { SUCCESS : 1, FAILURE : 0}[message]
-    exit(EXIT_CODE)
+def leave_program():
+    colors.echo("\nGood bye.", colors.BLUE)
+    exit()
 
 # Import convention
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――

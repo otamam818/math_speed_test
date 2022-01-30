@@ -26,6 +26,13 @@ MESSAGE_IndexError = '\n'.join([
 # | File names
 FILE_PREVIOUS_CALCULATIONS: str = "previous_calculations.txt"
 FILE_LAST_CALCULATION:      str = ".last_calculation"
+FILE_TEMP_USER_SCORE:       str = ".usr_score"
+
+ALL_FILES: list = [
+    FILE_LAST_CALCULATION,
+    FILE_PREVIOUS_CALCULATIONS,
+    FILE_TEMP_USER_SCORE
+]
 
 # Main function
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
@@ -61,8 +68,8 @@ def parse_commands(argv: list) -> None:
         )
 
         # Log the data for other (faster) languages to access
-        record_calculation(FILE_LAST_CALCULATION, question)
-        record_calculation(FILE_PREVIOUS_CALCULATIONS, question)
+        for my_file in ALL_FILES:
+            record_calculation(my_file, question)
 
         # As a CLI, the print acts as a return value
         print(question)

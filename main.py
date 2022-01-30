@@ -1,3 +1,4 @@
+# TODO: Update the users records by his/her score, based on their new game
 # Imports
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 import json_handler
@@ -12,27 +13,32 @@ def main() -> None:
     try:
         start_game()
     except KeyboardInterrupt:
-        print("\nGood bye.")
-        exit()
+        interface.leave_program()
 
 # Helper
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 def start_game() -> None:
     """Input-based (and also the default) version of the game"""
+    scores = []
     interface.greeting_message()
-    user_name:  str = interface.select_user()
-    user_score: str = json_handler.get_score(user_name)
-    game_choice: int = interface.choose_options()
-    while True:
-        test_time(user_name, user_score, game_choice)
 
-def test_time(username, user_score, game_choice):
+    user_name:  str = interface.select_user()
+    game_choice: int = interface.choose_options()
+    try:
+        test_time(user_name, game_choice, scores)
+    except KeyboardInterrupt:
+        interface.request_overwrite_score(user_name, scores, game_choice)
+
+def test_time(username, game_choice, scores: list):
     """Initiates the time-test for the user in the game"""
-    option = { 1 : 10, 2 : 100, 3 : 1000 }[game_choice]
-    initial_time = time()
-    interface.test_math(username, user_score, option)
-    final_time = time()
-    interface.show_time(final_time-initial_time)
+    while True:
+        option = { 1 : 10, 2 : 100, 3 : 1000 }[game_choice]
+        initial_time = time()
+        interface.test_math(username, option)
+        final_time = time()
+        temp_score = final_time-initial_time
+        interface.show_time(temp_score)
+        scores.append(temp_score)
 
 # Import convention
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
