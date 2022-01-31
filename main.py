@@ -1,4 +1,3 @@
-# TODO: Update the users records by his/her score, based on their new game
 # Imports
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 import json_handler
@@ -23,7 +22,7 @@ def start_game() -> None:
     interface.greeting_message()
 
     user_name:  str = interface.select_user()
-    game_choice: int = interface.choose_options()
+    game_choice: int = interface.choose_options(user_name)
     try:
         test_time(user_name, game_choice, scores)
     except KeyboardInterrupt:

@@ -1,3 +1,4 @@
+# TODO: Show the scores of the previous users
 # Imports
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 import json_handler
@@ -12,9 +13,11 @@ from statistics import mean
 # Constants
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 NUMBER_CHOICE: str = "\nPick a number: "
+
 YES_NO_CHOICE: str = "\n1. Yes\n2. No" + NUMBER_CHOICE
 YES = '1'
 NO  = '2'
+
 SEPARATOR = '―'*20
 SYMBOLS = "+-*/"
 
@@ -70,12 +73,11 @@ def select_user() -> str:
 def show_exit_shortcut() -> None:
     print("Press CTRL+C to quit")
 
-def choose_options() -> int:
-    options: str = "\n".join([
-        "1. Test for 10 numbers  ",
-        "2. Test for 100 numbers ",
-        "3. Test for 1000 numbers"
-    ])
+def choose_options(username) -> int:
+    options = ""
+    descriptions = json_handler.GAME_DESCRIPTION
+    for i in descriptions.keys():
+        options += f"{i}. Test for {json_handler.GAME_DESCRIPTION[i]}\n"
     separate()
     print("We have 3 options:\n" + options)
     options: List[str] = list("123")
