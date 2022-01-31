@@ -1,7 +1,7 @@
 import json
 from os import path 
 
-FILE: str = "records.json"
+FILE: str = "../../data/records.json"
 GAME_DESCRIPTION = {
     1 : "10 numbers",
     2 : "100 numbers",

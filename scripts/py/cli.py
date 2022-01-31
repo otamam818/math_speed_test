@@ -24,9 +24,9 @@ MESSAGE_IndexError = '\n'.join([
 ])
 
 # | File names
-FILE_PREVIOUS_CALCULATIONS: str = "previous_calculations.txt"
-FILE_LAST_CALCULATION:      str = ".last_calculation"
-FILE_TEMP_USER_SCORE:       str = ".usr_score"
+FILE_PREVIOUS_CALCULATIONS: str = "../../data/previous_calculations.txt"
+FILE_LAST_CALCULATION:      str = "../../data/.last_calculation"
+FILE_TEMP_USER_SCORE:       str = "../../data/.usr_score"
 
 ALL_FILES: list = [
     FILE_LAST_CALCULATION,
