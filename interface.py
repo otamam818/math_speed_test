@@ -1,12 +1,15 @@
 # TODO: Show the scores of the previous users
 # Imports
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
-import json_handler
+# | Standard library
 import subprocess
-
 import random
-import colors
 
+# | Local files
+import colors
+import json_handler
+
+# | 'from'-based imports
 from typing import Final, List, Union
 from statistics import mean 
 
