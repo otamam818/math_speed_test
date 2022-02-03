@@ -13,15 +13,15 @@ DIVISION:         str = '-d'
 MULTIPLICATION:   str = '-m'
 
 # | Error Messages
-MESSAGE_IndexError = '\n'.join([
-    "Wrong format. Please use The following format:",
-    "python3 cli.py -g NUMBER -x",
-    "Where -x could be any of the following operators: ",
-    "   -a -> addition",
-    "   -s -> subtraction",
-    "   -m -> multiplication",
-    "   -d -> division"
-])
+MESSAGE_IndexError = """
+Wrong format. Please use The following format:,
+python3 cli.py -g NUMBER -x,
+Where -x could be any of the following operators: ,
+   -a -> addition,
+   -s -> subtraction,
+   -m -> multiplication,
+   -d -> division
+"""
 
 # | File names
 FILE_PREVIOUS_CALCULATIONS: str = "../../data/previous_calculations.txt"
@@ -55,10 +55,10 @@ def parse_commands(argv: list) -> None:
 
     # For mapping command-line operations with their math operators
     operator_dict = {
-        ADDITION :       '+',
-        SUBTRACTION :    '-',
+        ADDITION       : '+',
+        SUBTRACTION    : '-',
         MULTIPLICATION : '*',
-        DIVISION :       '/'
+        DIVISION       : '/'
     }
 
     if command == GENERATE_COMMAND:
