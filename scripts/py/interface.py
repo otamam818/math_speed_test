@@ -16,6 +16,7 @@ from statistics import mean
 # Constants
 # ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 NUMBER_CHOICE: str = "\nPick a number: "
+EXIT_SHORTCUT: str = "Press CTRL+C to quit"
 
 YES_NO_CHOICE: str = "\n1. Yes\n2. No" + NUMBER_CHOICE
 YES = '1'
@@ -33,8 +34,8 @@ Number = Union[int, float]
 def greeting_message() -> None:
     separate()
     print("Welcome to the math tester,", 
-        "where we test your speed in basic maths.")
-    show_exit_shortcut()
+        "where we test your speed in basic maths.\n"
+        + EXIT_SHORTCUT)
 
 def separate(color = colors.BLUE) -> None:
     colors.echo(SEPARATOR, color)
@@ -73,9 +74,6 @@ def select_user() -> str:
             leave_program()
     return user_choice
 
-def show_exit_shortcut() -> None:
-    print("Press CTRL+C to quit")
-
 def choose_options(username) -> int:
     options = ""
     descriptions = json_handler.GAME_DESCRIPTION
@@ -102,13 +100,7 @@ def make_new_user() -> str:
 def test_math(username, option):
     """Tests the user with mathematic questions"""
     # A symbol needs to be unbiasedly chosen to test against
-    chosen_symbol = random.choice(SYMBOLS)
-    symbol_arg = {
-        '+' : "-a",
-        '-' : "-s",
-        '*' : "-m",
-        '/' : "-d"
-    }[chosen_symbol]
+    symbol_arg = get_symbol_arg()
 
     # Invoked from the commandline for eventually scaling the app
     command = f"python3 cli.py -g {option} {symbol_arg}"
@@ -122,6 +114,15 @@ def test_math(username, option):
     actual_answer: Number = parse_answer(question, chosen_symbol)
 
     assess_answer(given_answer, actual_answer)
+
+def get_symbol_arg() -> str:
+    chosen_symbol = random.choice(SYMBOLS)
+    return {
+        '+' : "-a",
+        '-' : "-s",
+        '*' : "-m",
+        '/' : "-d"
+    }[chosen_symbol]
 
 def assess_answer(given_answer: Number, actual_answer: Number) -> None:
     answer_matches: bool = compare_answers(given_answer, actual_answer)
