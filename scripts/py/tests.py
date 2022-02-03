@@ -1,6 +1,7 @@
 # Standard library imports
 import unittest, subprocess
 from typing import List
+from random import choice
 
 # Local imports
 import json_handler, interface, math_handler, cli
@@ -18,6 +19,18 @@ class TestScripts(unittest.TestCase):
         self.assertTrue(all_numeric(numbers))
 
     # Module: cli.py
+    def test_parse_commands(self):
+        option = 1000
+        symbol_arg = interface.get_symbol_arg()
+        command = f"python3 cli.py -g {option} {symbol_arg}"
+        result = subprocess.getoutput(command)
+        components: list = result.split()
+        
+        # Check if the positioning of the result is correct
+        are_numbers: bool = components[0].isnumeric()
+        are_numbers = are_numbers and components[2].isnumeric()
+        is_symbol: bool = components[1] in interface.SYMBOLS
+        is_valid: bool = are_numbers and is_symbol
 
 # Helper functions
 def all_numeric(iterable: List[str]) -> bool:
