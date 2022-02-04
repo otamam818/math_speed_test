@@ -39,6 +39,8 @@ class TestScripts(unittest.TestCase):
         is_symbol: bool = components[1] in interface.SYMBOLS
         is_valid: bool = are_numbers and is_symbol
 
+        self.assertTrue(is_valid)
+
 # Helper functions
 def all_numeric(iterable: List[str]) -> bool:
     """check if they are all numeric"""
