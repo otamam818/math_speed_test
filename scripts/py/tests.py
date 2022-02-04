@@ -6,6 +6,8 @@ from random import choice
 # Local imports
 import json_handler, interface, math_handler, cli
 
+FIRST_USER = "Tamam"
+
 def main():
     unittest.main()
 
@@ -18,6 +20,11 @@ class TestScripts(unittest.TestCase):
 
         self.assertTrue(all_numeric(numbers))
 
+    def test_select_user(self):
+        # Choose option 1
+        username = interface.select_user()
+        self.assertEqual(username, FIRST_USER)
+
     # Module: cli.py
     def test_parse_commands(self):
         option = 1000
@@ -25,10 +32,10 @@ class TestScripts(unittest.TestCase):
         command = f"python3 cli.py -g {option} {symbol_arg}"
         result = subprocess.getoutput(command)
         components: list = result.split()
-        
+
         # Check if the positioning of the result is correct
-        are_numbers: bool = components[0].isnumeric()
-        are_numbers = are_numbers and components[2].isnumeric()
+        are_numbers: bool = (components[0].isnumeric()
+                             and components[2].isnumeric())
         is_symbol: bool = components[1] in interface.SYMBOLS
         is_valid: bool = are_numbers and is_symbol
 
