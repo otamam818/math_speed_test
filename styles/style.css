@@ -1,0 +1,11 @@
+body {
+  background-color: #262626;
+  color: white;
+}
+
+#title {
+  display: flex;
+  justify-content: center;
+}
+
+/*# sourceMappingURL=style.css.map */
