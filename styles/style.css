@@ -8,4 +8,19 @@ body {
   justify-content: center;
 }
 
+.fatbutton {
+  color: white;
+  background-color: #313131;
+  box-shadow: 0px 0px 3px #121212;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 0px solid transparent;
+  border-radius: 15px;
+  outline: transparent;
+  height: 200px;
+}
+.fatbutton:active {
+  background-color: #2C2C2C;
+}
+
 /*# sourceMappingURL=style.css.map */
