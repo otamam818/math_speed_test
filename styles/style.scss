@@ -3,9 +3,24 @@
     padding-right: $width;
 }
 
+@mixin make-round-box {
+    color: white;
+    background-color: #313131;
+    border: 0px solid transparent;
+    border-radius: 15px;
+    outline: transparent;
+    box-shadow: 0px 0px 3px #121212;
+}
+
 body {
     background-color: #262626;
     color: white;
+}
+
+main {
+    width: 80%;
+    margin-left: 20%;
+    justify-content: end;
 }
 
 #title {
@@ -14,14 +29,9 @@ body {
 }
 
 .fatbutton {
-    color: white;
-    background-color: #313131;
-    box-shadow: 0px 0px 3px #121212;
-    @include pad-width(10px);
-    border: 0px solid transparent;
-    border-radius: 15px;
-    outline: transparent;
+    @include make-round-box;
     height: 200px;
+    @include pad-width(10px);
 
     &:active {
         background-color: #2C2C2C;
