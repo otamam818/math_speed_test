@@ -45,6 +45,10 @@ def main(argv: list):
         exit()
 
 def parse_commands(argv: list) -> None:
+    """
+    Parses the commands to generate mathematical questions based on
+    requirements
+    """
     command = argv[1]
 
     # We need to know for how many digits we need to calculate
@@ -75,6 +79,7 @@ def parse_commands(argv: list) -> None:
         print(question)
 
 def record_calculation(filename: str, data: str) -> None:
+    """Records the calculation that took place"""
     mode: str
     if filename == FILE_PREVIOUS_CALCULATIONS:
         mode = 'a'
