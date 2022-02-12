@@ -1,8 +1,10 @@
 // Mixins
 // ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 @mixin pad-width($width) {
-    padding-left:  $width;
-    padding-right: $width;
+    padding:  {
+        left: $width;
+        right: $width;
+    }
 }
 
 @mixin make-round-box {
