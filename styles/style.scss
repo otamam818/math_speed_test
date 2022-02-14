@@ -1,3 +1,8 @@
+// Variables
+// ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+$basic-shadow: 0px 0px 3px #121212;
+$main-bg: #262626;
+
 // Mixins
 // ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 @mixin pad-width($width) {
@@ -13,13 +18,13 @@
     border: 0px solid transparent;
     border-radius: 15px;
     outline: transparent;
-    box-shadow: 0px 0px 3px #121212;
+    box-shadow: $basic-shadow;
 }
 
 // CSS
 // ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 body {
-    background-color: #262626;
+    background-color: $main-bg;
     color: white;
 }
 
